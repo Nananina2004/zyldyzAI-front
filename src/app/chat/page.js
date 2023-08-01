@@ -350,7 +350,7 @@ export default function Chat() {
             <button className="justify-center sm:hidden rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
               type="button"
               onClick={() => window.my_modal_1.showModal()}>
-              <span>Image</span>
+              <span>Natal Chart</span>
             </button>
             <dialog id="my_modal_1" className="modal">
               <form method="dialog" className="modal-box">
