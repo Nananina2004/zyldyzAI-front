@@ -1,4 +1,3 @@
-
 'use client'
 
 import { throttle } from '../../../lib/throttle'
@@ -17,7 +16,7 @@ import ModalWindow from '../../../components/modal_window'
 export const initialMessages = [
   {
     role: 'assistant',
-    content: 'Добро пожаловать в Чат с экспертом по астрологии Zyldyz AI. Не стесняйтесь задавать мне любые вопросы, связанные с астрологией! Но прежде чем начать не забудь ввести свои данные рождения с помощью кнопки Submit Birthday',
+    content: 'Welcome to Chat with astrology expert Zyldyz AI. Feel free to ask me any questions related to astrology! But before you start, do not forget to enter your birth details using the Submit Birthday button.',
   },
 ]
 
@@ -342,73 +341,11 @@ export default function Chat() {
           </button>
         </div>
   
-        {!bb ? (
-          <button
-            className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-            type="submit"
-            onClick={handleBirthday}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-edit"
-            >
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-            </svg>
-            <span>Submit Birthday</span>
-          </button>
-        ) : svgLoading ? (
-          <span className="flex justify-center align-center loading loading-infinity loading-lg"></span>
-        ) : (
-          <div className="p-4 my-3 h-auto flex flex-col items-center justify-center">
-            <Image
-              className="sm:block hidden"
-              src={svg}
-              alt="Your Natal Chart"
-              height={272}
-              width={216}
-              onClick={() => window.my_modal_1.showModal()}
-            />
+        <div className="flex justify-center items-center mt-4">
+          {!bb ? (
             <button
-              className="justify-center sm:hidden rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-              type="button"
-              onClick={() => window.my_modal_1.showModal()}
-            >
-              <span>Natal Chart</span>
-            </button>
-            <dialog id="my_modal_1" className="modal">
-              <form method="dialog" className="modal-box">
-                <Image
-                  className=""
-                  src={svg}
-                  alt="Your Natal Chart"
-                  height={1000}
-                  width={1000}
-                  onClick={() => window.my_modal_1.showModal()}
-                />
-                <p className="py-4 text-black">
-                  Press ESC key or click the button below to close
-                </p>
-                <div className="modal-action">
-                  <button className="btn">Close</button>
-                </div>
-              </form>
-            </dialog>
-            <button
-              className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-              type="button"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="radix-:ra:"
-              data-state="closed"
+              className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+              type="submit"
               onClick={handleBirthday}
             >
               <svg
@@ -426,10 +363,74 @@ export default function Chat() {
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
               </svg>
-              <span>Birth Information</span>
+              <span>Submit Birthday</span>
             </button>
-          </div>
-        )}
+          ) : svgLoading ? (
+            <span className="flex justify-center align-center loading loading-infinity loading-lg"></span>
+          ) : (
+            <div className="p-4 my-3 h-auto flex flex-col items-center justify-center">
+              <Image
+                className="sm:block hidden"
+                src={svg}
+                alt="Your Natal Chart"
+                height={272}
+                width={216}
+                onClick={() => window.my_modal_1.showModal()}
+              />
+              <button
+                className="justify-center sm:hidden rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+                type="button"
+                onClick={() => window.my_modal_1.showModal()}
+              >
+                <span>Natal Chart</span>
+              </button>
+              <dialog id="my_modal_1" className="modal">
+                <form method="dialog" className="modal-box">
+                  <Image
+                    className=""
+                    src={svg}
+                    alt="Your Natal Chart"
+                    height={1000}
+                    width={1000}
+                    onClick={() => window.my_modal_1.showModal()}
+                  />
+                  <p className="py-4 text-black">
+                    Press ESC key or click the button below to close
+                  </p>
+                  <div className="modal-action">
+                    <button className="btn">Close</button>
+                  </div>
+                </form>
+              </dialog>
+              <button
+                className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+                type="button"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="radix-:ra:"
+                data-state="closed"
+                onClick={handleBirthday}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-edit"
+                >
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                <span>Birth Information</span>
+              </button>
+            </div>
+          )}
+        </div>
   
         <footer className="sm:absolute static bottom-0 p-4 bg-gray-800 text-white text-center">
           <p>

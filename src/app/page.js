@@ -69,7 +69,7 @@ export default function Home() {
           <p className="uppercase font-semibold tracking-widest text-lg">Zyldyz AI</p>
         </div>
         <div className="flex" />
-        <div className="px-2 h-full hidden items-center justify-end lg:flex">
+        <div className="flex justify-between px-2 h-fullhidden items-center justify-end lg:flex">
         <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
         type="submit" onClick={navigate_login}
       >
@@ -95,12 +95,9 @@ export default function Home() {
     <div className='m-0' style={{
       backgroundImage: 'url(/background.png)',
     }}>
-      <div
-        id="banner-section"
-        className="flex items-center justify-center relative overflow-hidden pb-36 mx-20 sm:mx-10"
-      >
-        <div className="container">
-          <div className="banner min-w-600 pt-40 sm:pt-30 text-left text-white">
+          <div id="banner-section" className="flex items-center justify-center relative overflow-hidden pb-36 mx-5 sm:mx-20">
+      <div className="container">
+        <div className="banner min-w-600 pt-40 sm:pt-30 text-left text-white">
           <h2
             className="banner__header text-2xl md:text-5xl lg:text-6xl leading-tight tracking-tight"
             initial={{ opacity: 0, y: 50 }}
@@ -108,21 +105,22 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             style={{ wordWrap: "break-word" }}
           >
-            <Balancer>ZyldyzAI: The Future of Astrology is Here</Balancer>
+            <span className="text-indigo-600">ZyldyzAI:</span> The Future of Astrology is Here
           </h2>
 
-            <p
-              className="banner__text mt-8 text-base md:text-lg text-white"
-              initial={{ opacity: 0, y: 50 }}
-              animate={controls}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Balancer>ZyldyzAI is your personal astrologer who will answer all your questions regarding astrology</Balancer>
-            </p>
-            <div className="banner-links-wrap mt-12">
+          <p
+            className="banner__text mt-8 text-base md:text-lg text-white"
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <span className="text-indigo-600">ZyldyzAI</span> is your personal astrologer who will answer all your questions regarding astrology
+          </p>
+
+          <div className="banner-links-wrap mt-12 md:left-10">
             <a onClick={lala}>
               <div
-                className="relative inline-flex items-center justify-start py-3 pl-4 m-5 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+                className="relative inline-flex items-center justify-start py-3 pl-4 sm:m-0 md:m-5 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
                 style={{
                   borderRadius: '15px',
                   background: 'linear-gradient(169deg, rgba(246, 55, 250, 0.73) 0%, rgba(59, 99, 240, 0.72) 100%)',
@@ -130,7 +128,7 @@ export default function Home() {
                 }}
               >
                 <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
-                <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
+                <span className="absolute right-0 pr-4 sm:pr-1 duration-200 ease-out group-hover:translate-x-12">
                   <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
                 <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
@@ -139,16 +137,18 @@ export default function Home() {
                 <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Get started</span>
               </div>
             </a>
-            </div>
           </div>
         </div>
-        <div>
-          <Image src={"/image.png"} 
-            width={330}
-            height={335}
-            className=''
-          />
-        </div>
+      </div>
+      <div className="hidden md:block">
+        <Image
+          src="/image.png"
+          width={330}
+          height={335}
+          className=""
+          alt="Your Image"
+        />
+      </div>
       </div>
       <div
   className="flex items-center justify-center flex-col min-h-screen animate-fade-down animate-duration-[2000ms] animate-delay-[15ms]"
