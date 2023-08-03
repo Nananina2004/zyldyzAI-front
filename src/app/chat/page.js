@@ -203,18 +203,10 @@ export default function Chat() {
   const [bb, setBb] = useState(false)
   const router = useRouter()
   const [svgLoading, setSvgLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+ 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('svg')
     router.push('/')
   };
 
@@ -238,8 +230,11 @@ export default function Chat() {
           },
         });
 
+
         setSvg(response.data.message);
-        setSvgLoading(false); // SVG is loaded, set to false
+        localStorage.setItem('svg', response.data.message); // Use response.data.message instead of response.data.access_token
+
+        setSvgLoading(false); 
 
       }
     } catch (error) {
@@ -249,7 +244,14 @@ export default function Chat() {
 
 
   useEffect(() => {
-    getChart();
+    const savedSvg = localStorage.getItem('svg');
+    if (savedSvg) {
+      setSvg(savedSvg);
+      setSvgLoading(false);
+    }
+    else{
+      getChart();
+    }
   }, [bb]);
 
   const handleScroll = () => {
@@ -306,17 +308,32 @@ export default function Chat() {
   useEffect(() => {
     checkBirthday();
   }, []);
-
   return (
     <div className="flex flex-col h-screen md:flex-row">
       {/* Left Sidebar */}
       <div className="relative w-full md:w-1/4 p-4 bg-gray-800 text-white">
-        <div className='flex flex-row'>
-          <p className="text-lg w-full font-semibold"><a href='/'>Zyldyz AI</a></p>
-          <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+        {/* Sidebar Content */}
+        <div className="flex flex-row">
+          <p className="text-lg w-full font-semibold">
+            <a href="/">Zyldyz AI</a>
+          </p>
+          <button
+            className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
             type="button"
-            onClick={handleLogout}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+            onClick={handleLogout}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-log-out"
+            >
               <path d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
               <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -324,51 +341,69 @@ export default function Chat() {
             <span>Logout</span>
           </button>
         </div>
-
-        {!bb && (
-          <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-            type="submit" onClick={handleBirthday}
+  
+        {!bb ? (
+          <button
+            className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+            type="submit"
+            onClick={handleBirthday}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
-              <path d="M20 6L9 17l-5-5"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-edit"
+            >
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
             </svg>
             <span>Submit Birthday</span>
           </button>
-
-        )}
-
-        {bb && !svgLoading ? (
+        ) : svgLoading ? (
+          <span className="flex justify-center align-center loading loading-infinity loading-lg"></span>
+        ) : (
           <div className="p-4 my-3 h-auto flex flex-col items-center justify-center">
             <Image
-              className='sm:block hidden'
+              className="sm:block hidden"
               src={svg}
               alt="Your Natal Chart"
               height={272}
               width={216}
               onClick={() => window.my_modal_1.showModal()}
             />
-            <button className="justify-center sm:hidden rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+            <button
+              className="justify-center sm:hidden rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
               type="button"
-              onClick={() => window.my_modal_1.showModal()}>
+              onClick={() => window.my_modal_1.showModal()}
+            >
               <span>Natal Chart</span>
             </button>
             <dialog id="my_modal_1" className="modal">
               <form method="dialog" className="modal-box">
                 <Image
-                  className=''
+                  className=""
                   src={svg}
                   alt="Your Natal Chart"
                   height={1000}
                   width={1000}
                   onClick={() => window.my_modal_1.showModal()}
                 />
-                <p className="py-4 text-black">Press ESC key or click the button below to close</p>
+                <p className="py-4 text-black">
+                  Press ESC key or click the button below to close
+                </p>
                 <div className="modal-action">
-                  {/* if there is a button in form, it will close the modal */}
                   <button className="btn">Close</button>
                 </div>
               </form>
-            </dialog>    <button className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+            </dialog>
+            <button
+              className="justify-center rounded-md mt-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-purple-500 hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
               type="button"
               aria-haspopup="dialog"
               aria-expanded="false"
@@ -376,25 +411,33 @@ export default function Chat() {
               data-state="closed"
               onClick={handleBirthday}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-edit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-edit"
+              >
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
               </svg>
               <span>Birth Information</span>
             </button>
           </div>
-
-
-        ) : (
-          svgLoading && <span className="flex justify-center align-center loading loading-infinity loading-lg"></span>
         )}
-
+  
         <footer className="sm:absolute static bottom-0 p-4 bg-gray-800 text-white text-center">
-          <p>Contact with me nurayna.medresova@bk.ru  Telegram: @nnurainaaaa</p>
+          <p>
+            Contact with me nurayna.medresova@bk.ru Telegram: @nnurainaaaa
+          </p>
         </footer>
       </div>
-
-
+  
       <div className="relative flex-1 p-5 rounded">
         <h1 className="text-2xl font-bold mb-4">Zyldyz AI Chat</h1>
         <div
@@ -403,15 +446,17 @@ export default function Chat() {
           onScroll={handleScroll}
         >
           {messages.map(({ content, role }, index) => (
-            <ChatLine key={index} role={role} content={content} isStreaming={index === messages.length - 1 && isMessageStreaming} />
+            <ChatLine
+              key={index}
+              role={role}
+              content={content}
+              isStreaming={index === messages.length - 1 && isMessageStreaming}
+            />
           ))}
-
+  
           {loading && <LoadingChatLine />}
-
-          <div
-            className="h-[152px] bg-white p-10"
-            ref={messagesEndRef}
-          />
+  
+          <div className="h-[152px] bg-white p-10" ref={messagesEndRef} />
         </div>
         <InputMessage
           input={input}
@@ -422,5 +467,6 @@ export default function Chat() {
       </div>
       <Toaster />
     </div>
-  )
+  );
+  
 }

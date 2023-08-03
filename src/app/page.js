@@ -52,7 +52,7 @@ export default function Home() {
     if (token != null) {
       router.push('/chat'); 
     } else {
-      router.push('/sign-up'); 
+      router.push('/sign-in'); 
     }
   }
 

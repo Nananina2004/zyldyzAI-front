@@ -10,7 +10,8 @@ const Page = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
-  
+    const [isRegistering, setIsRegistering] = useState(false);
+
 
     const handleEmailChange = (event) => {
         setUsername(event.target.value);
@@ -27,7 +28,11 @@ const Page = () => {
       
       async function registerUser(event) {
         event.preventDefault();
+        if (isRegistering) {
+          return;
+        }
         if(password != '' && password === confPassword){
+          setIsRegistering(true);
         try {
           const userData = {
             email: username,
@@ -39,11 +44,25 @@ const Page = () => {
           console.log('User registered successfully:', response.data);
           console.log(response.status)
           if(response.status == 201) {
-            router.push('/sign-in')
+            const userData = new URLSearchParams();
+            userData.append('grant_type', 'password');
+            userData.append('username', username);
+            userData.append('password', password); 
+        
+            const response = await axios.post('https://fastapi-8yb5.onrender.com/auth/users/tokens', userData, {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+            });
+            if(response.status == 200) {
+              localStorage.setItem('token', response.data.access_token)
+              router.push('/chat')
+            }
           }
         } catch (error) {
           console.error('Error registering user:', error.message);
-          
+        } finally {
+          setIsRegistering(false); 
         }
       }else {
         window.alert("Wrong password!!!")
