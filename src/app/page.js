@@ -69,26 +69,29 @@ export default function Home() {
           <p className="uppercase font-semibold tracking-widest text-lg">Zyldyz AI</p>
         </div>
         <div className="flex" />
-        <div className="flex justify-between px-2 h-fullhidden items-center justify-end lg:flex">
-        <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-        type="submit" onClick={navigate_login}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in">
-          <path d="M15 3c-.3 0-.5.1-.7.3l-7 7c-.4.4-.6 1-.6 1.7v2c0 1.1.9 2 2 2h1c.6 0 1-.4 1-1v-2c0-.6.2-1.2.6-1.7l7-7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0l-6.3 6.3-1.3-1.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l2 2c.2.2.5.3.7.3s.5-.1.7-.3l2-2c.4-.4.4-1 0-1.4l-1.3-1.3 6.3-6.3c.4-.4.4-1 0-1.4-.4-.2-.9-.2-1.3 0l-7 7c-.2.2-.3.5-.3.7s.1.5.3.7l7 7c.2.2.5.3.7.3s.5-.1.7-.3c.4-.4.4-1 0-1.4l-7-7c-.4-.4-.6-1-.6-1.7s.2-1.3.6-1.7l7-7c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.5-.3-.7-.3z"></path>
-        </svg>
-        <span>Login</span>
-      </button>
+        <div className="flex justify-between px-2 h-full hidden items-center justify-end lg:flex">
+  <div className="mr-2">
+    <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+      type="submit" onClick={navigate_login}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in">
+        <path d="M15 3c-.3 0-.5.1-.7.3l-7 7c-.4.4-.6 1-.6 1.7v2c0 1.1.9 2 2 2h1c.6 0 1-.4 1-1v-2c0-.6.2-1.2.6-1.7l7-7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0l-6.3 6.3-1.3-1.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l2 2c.2.2.5.3.7.3s.5-.1.7-.3l2-2c.4-.4.4-1 0-1.4l-1.3-1.3 6.3-6.3c.4-.4.4-1 0-1.4-.4-.2-.9-.2-1.3 0l-7 7c-.2.2-.3.5-.3.7s.1.5.3.7l7 7c.2.2.5.3.7.3s.5-.1.7-.3c.4-.4.4-1 0-1.4l-7-7c-.4-.4-.6-1-.6-1.7s.2-1.3.6-1.7l7-7c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.5-.3-.7-.3z"></path>
+      </svg>
+      <span>Login</span>
+    </button>
+  </div>
 
-      <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
-        type="submit" onClick={navigate}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
-          <path d="M16 16v-2m0 0-1 1m1-1 1-1m-8.586-1.414A5.98 5.98 0 0112 7c1.657 0 3 1.343 3 3 0 .737-.28 1.405-.737 1.914m-6.326-.839a9.004 9.004 0 018.53-5.177c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9c0-1.774.515-3.426 1.413-4.826"></path>
-        </svg>
-        <span>Register</span>
-      </button>
-
-        </div>
+  <div className="ml-2">
+    <button className="justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 flex items-center gap-2"
+      type="submit" onClick={navigate}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+        <path d="M16 16v-2m0 0-1 1m1-1 1-1m-8.586-1.414A5.98 5.98 0 0112 7c1.657 0 3 1.343 3 3 0 .737-.28 1.405-.737 1.914m-6.326-.839a9.004 9.004 0 018.53-5.177c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9c0-1.774.515-3.426 1.413-4.826"></path>
+      </svg>
+      <span>Register</span>
+    </button>
+  </div>
+</div>
       </nav>
 
 
