@@ -140,11 +140,11 @@ const useMessages = () => {
       { role: 'user', content: newMessage },
     ];
     setMessages(newMessages);
-
+    const last10messages = newMessage.slice(-10);
     try {
       const response = await axios.post('https://fastapi-8yb5.onrender.com/chat/',
         {
-          msg_text: newMessages[1].content
+          msg_text: last10messages
         },
         {
           headers: {
